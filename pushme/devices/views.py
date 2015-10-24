@@ -10,6 +10,8 @@ class GCMRegisterView(generics.CreateAPIView):
     http_method_names = ['post', 'options']
 
     def perform_create(self, serializer):
+        reg_id = serializer.data.get('registration_id')
+        GCMDevice.objects.filter(registration_id=reg_id).delete()
         serializer.save(user=self.request.user)
 
 class GCMDevicesList(generics.ListAPIView):

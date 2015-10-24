@@ -28,10 +28,12 @@ class LoginViewTest(TestCase):
 class RegistrationViewTest(TestCase):
 
     def test_should_create_user(self):
-        response = self.client.post('/register', {'email':'asd@asd.ru', 'password': 'xdd'})
+        password = 'pass'
+        response = self.client.post('/register', {'email':'asd@asd.ru', 'password': password})
         self.assertEqual(response.status_code, 201)
 
         db_user = User.objects.get(email='asd@asd.ru')
 
         self.assertEqual(db_user.email, 'asd@asd.ru')
+        self.assertTrue(db_user.check_password(password))
 

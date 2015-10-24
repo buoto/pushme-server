@@ -23,6 +23,18 @@ class GCMRegisterViewTest(TestCase):
         self.assertEqual(push_models.GCMDevice.objects.filter(registration_id=reg_id)[0].user,
                 self.actor)
 
+    def test_should_register_device_once(self):
+        reg_id = 'asdfasdfasd'
+        response = self.client.post('/gcms/register', {'registration_id': reg_id})
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        self.assertEquals(push_models.GCMDevice.objects.filter(registration_id=reg_id).count(), 1)
+
+        response = self.client.post('/gcms/register', {'registration_id': reg_id})
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        self.assertEquals(push_models.GCMDevice.objects.filter(registration_id=reg_id).count(), 1)
+
 class GCMDevicesListViewTest(TestCase):
     def setUp(self):
         self.client = APIClient()

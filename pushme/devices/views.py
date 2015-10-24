@@ -9,6 +9,9 @@ class GCMRegisterView(generics.CreateAPIView):
     device_class = GCMDevice
     http_method_names = ['post', 'options']
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 class GCMDevicesList(generics.ListAPIView):
     serializer_class = GCMDeviceSerializer
     queryset = GCMDevice.objects.all()

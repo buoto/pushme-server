@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import generics, response, status
+from rest_framework import generics, response, status, permissions
 from appclients import serializers, models
 
 
@@ -7,7 +7,7 @@ class GenerateKeyView(generics.CreateAPIView):
     serializer_class = serializers.ClientSerializer
 
     def perform_create(self, serializer):
-        client = serializer.save(user=self.request.user)
+        serializer.save(user=self.request.user)
 
 class ClientListView(generics.ListAPIView):
     serializer_class = serializers.ClientSerializer
@@ -18,6 +18,7 @@ class ClientListView(generics.ListAPIView):
         return q.filter(user=self.request.user)
 
 class SendView(generics.GenericAPIView):
+    permission_classes = [permissions.AllowAny]
     serializer_class = serializers.SendSerializer
     allowed_methods = ['post', 'get', 'options']
 
@@ -43,4 +44,4 @@ class SendView(generics.GenericAPIView):
             recipient.send_message(data['content'])
 
         return response.Response({'count': recipients.count(),
-            'recipients': [r.token for r in recipients]}, status=status.HTTP_200_OK)
+            'recipients': [r.registration_id for r in recipients]}, status=status.HTTP_200_OK)

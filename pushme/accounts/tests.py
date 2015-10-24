@@ -31,9 +31,7 @@ class RegistrationViewTest(TestCase):
         response = self.client.post('/register', {'email':'asd@asd.ru', 'password': 'xdd'})
         self.assertEqual(response.status_code, 201)
 
-        print response.data
-
         db_user = User.objects.get(email='asd@asd.ru')
 
-        self.assertEqual(db_user.email, '')
+        self.assertEqual(db_user.email, 'asd@asd.ru')
 

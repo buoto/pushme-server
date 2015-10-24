@@ -18,6 +18,7 @@ from django.contrib import admin
 from push_notifications.api.rest_framework import APNSDeviceAuthorizedViewSet
 import accounts.views
 import devices.views
+import appclients.views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -25,4 +26,5 @@ urlpatterns = [
     url(r'^register', accounts.views.RegisterView.as_view()),
     url(r'^gcms/register', devices.views.GCMRegisterView.as_view()),
     url(r'^devices', devices.views.GCMDevicesList.as_view()),
+    url(r'^gen_key', appclients.views.GenerateKeyView.as_view()),
 ]

@@ -1,5 +1,6 @@
 from django.test import TestCase
 from rest_framework.test import APIClient
+from rest_framework import status
 from accounts.models import User
 from push_notifications import models as push_models
 
@@ -12,7 +13,7 @@ class GCMRegisterViewTest(TestCase):
     def test_should_register_device(self):
         reg_id = 'asdfasdfasd'
         response = self.client.post('/gcms/register', {'registration_id': reg_id})
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertTrue(push_models.GCMDevice.objects.filter(registration_id=reg_id).exists())
 
 class GCMDevicesListViewTest(TestCase):
@@ -28,7 +29,7 @@ class GCMDevicesListViewTest(TestCase):
 
         response = self.client.get('/devices')
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertItemsEqual([d['registration_id'] for d in response.data['results']], ['asd', 'dsa'])
 
 

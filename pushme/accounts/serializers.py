@@ -25,22 +25,27 @@ class LoginUserSerializer(serializers.Serializer):
             raise serializers.ValidationError("Missing fields!")
 
 class CreateUserSerializer(serializers.ModelSerializer):
+    token = serializers.SerializerMethodField()
     class Meta:
         model = models.User
         fields = (
             'email',
-            'auth_token',
+            'token',
+            'password',
         )
         write_only_fields = (
             'password',
         )
         read_only_fields = (
-            'auth_token',
+            'token'
         )
 
     def create(self, attrs, instance=None):
         user = models.User.objects.create_user(**attrs)
         return user
+
+    def get_token(self, obj):
+        return str(obj.auth_token)
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

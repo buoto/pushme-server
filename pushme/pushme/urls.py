@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from push_notifications.api.rest_framework import APNSDeviceAuthorizedViewSet
 import accounts.views
 
 urlpatterns = [

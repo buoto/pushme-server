@@ -42,8 +42,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'devices',
     'accounts',
-
+    'push_notifications',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -120,3 +121,24 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+PUSH_NOTIFICATION_SETTINGS = {
+    'GCM_API_KEY': 'AIzaSyD-yccNkCCYVpyxdRKVeceVEKu0jtU1gxg'
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}

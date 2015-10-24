@@ -29,6 +29,7 @@ ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'accounts.User'
 
+SESSION_SECURITY_EXPIRE_AFTER=10
 
 # Application definition
 

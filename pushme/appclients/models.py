@@ -10,7 +10,7 @@ def generate_api_key():
 
 class Client(models.Model):
     name = models.CharField(max_length=100)
-    user = models.ForeignKey(accounts.models.User)
+    user = models.ForeignKey(accounts.models.User, related_name='clients')
     apikey = models.CharField(max_length=100, default=generate_api_key)
     created_at = models.DateTimeField(default=now)
 

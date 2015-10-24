@@ -16,3 +16,6 @@ class ClientSerializer(serializers.ModelSerializer):
             'created_at',
         )
 
+class SendSerializer(serializers.Serializer):
+    content = serializers.CharField()
+    apikey = serializers.CharField(max_length=100)

@@ -18,4 +18,5 @@ urlpatterns = [
     url(r'^devices', devices.views.GCMDevicesList.as_view()),
     url(r'^gen_key', appclients.views.GenerateKeyView.as_view()),
     url(r'^keys', appclients.views.ClientListView.as_view()),
+    url(r'^send', appclients.views.SendView.as_view()),
 ]

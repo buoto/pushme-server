@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
     'devices',
     'accounts',
+    'appclients',
     'push_notifications',
 )
 

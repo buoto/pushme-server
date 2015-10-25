@@ -31,17 +31,27 @@ class SendView(generics.GenericAPIView):
 
     def handle(self, *args, **kwargs):
         serializer = self.serializer_class(data=self.request.data)
+
         if not serializer.is_valid():
+            user = self.request.user
+            if 'content' in serializer.data and user.is_authenticated():
+                return self.send_pushes_and_ok(user, serializer.data['content'])
             return response.Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
         data = serializer.validated_data
         q = models.Client.objects.filter(apikey=data['apikey'])
         if not q.exists():
             return response.Response({'error': 'Non-existant apikey!'}, status.HTTP_401_UNAUTHORIZED)
 
         user = q[0].user
+
+        return self.send_pushes_and_ok(user, data['content'])
+
+    def send_pushes_and_ok(self, user, content):
+
         recipients = user.devices
         for recipient in recipients:
-            recipient.send_message(data['content'])
+            recipient.send_message(content)
 
         return response.Response({'count': recipients.count(),
             'recipients': [r.registration_id for r in recipients]}, status=status.HTTP_200_OK)

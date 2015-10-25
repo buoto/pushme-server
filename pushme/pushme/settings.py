@@ -73,6 +73,11 @@ ROOT_URLCONF = 'pushme.urls'
 
 CORS_ALLOW_ALL = True
 
+CORS_ORIGIN_WHITELIST = (
+    '127.0.0.1:9000'
+    'localhost:9000'
+)
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

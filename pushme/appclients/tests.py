@@ -54,7 +54,6 @@ class SendViewTest(TestCase):
     def setUp(self):
         self.client = APIClient()
         self.actor = User.objects.create_user('asd@asd.ru', 'pass')
-        self.client.force_authenticate(user=self.actor)
 
     def test_returns_200(self):
         c = Client.objects.create(name='test client', user=self.actor)
@@ -69,3 +68,7 @@ class SendViewTest(TestCase):
         response = self.client.post('/send', {'token': 'pass', 'content': 'asdsadasda'})
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
+    def test_should_send_with_token_authentication(self):
+        self.client.force_authenticate(user=self.actor)
+        response = self.client.post('/send', {'content': 'asdsadasda'})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)

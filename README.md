@@ -1,5 +1,6 @@
 # pushme-server
 [![Build Status](https://travis-ci.org/buoto/pushme-server.svg)](https://travis-ci.org/buoto/pushme-server)
+[![Code Climate](https://codeclimate.com/github/buoto/pushme-server/badges/gpa.svg)](https://codeclimate.com/github/buoto/pushme-server)
 
 Django app wrapping Google Cloud Messaging service which provides api allowing you to send push messages to connected devices in one HTTP request. Simplicity of that design can be illustrated by [this almost-one-liner script](./misc/send.sh):
 
@@ -7,7 +8,7 @@ Django app wrapping Google Cloud Messaging service which provides api allowing y
     API_URL=${API_URL:='api.pushme.neutrino.re'}
     curl $API_URL/send -d apikey=$API_KEY\&content=$1
     echo ''
-To send this push message only two things were required: API_KEY obtained from api (`/gen_key`) and actual message content.
+To send this push message only two things were required: API_KEY obtained from api (`/gen_key`) and actual message content. Then you can use it, for example to notify yourself that your production server has crashed or that somebody pinged you on weechat.
 
 
 ## About

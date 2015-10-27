@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'tm+9i&qol!z5c5)r=cm7hkhfwtn#@abwg*b$&3f20-kup9qk)v' #TODO hid this
+SECRET_KEY = 'dummy' # FILLME
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -135,7 +135,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 PUSH_NOTIFICATIONS_SETTINGS = {
-    'GCM_API_KEY': 'AIzaSyDldPZ9KS4iAqO6RM2p_YsJqIRErxvEpEo' #TODO hid this
+    'GCM_API_KEY': 'dummy' # FILLME
 }
 
 LOGGING = {

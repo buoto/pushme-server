@@ -14,7 +14,7 @@ To send this push message only two things were required: API_KEY obtained from a
 ## About
 This app was created during AGHacks2015 Hackathon, as a part of push.me project
 ([devpost.com/software/push-me](http://devpost.com/software/push-me)).
-To be usable it requires mobile app to obtain phone id and handle push messages, which was also created during hackathon, but isn't available at the moment.
+To be usable it requires mobile app to obtain phone id and handle push messages. Lastest build of app is available here: [LINK](http://przembot.neutrino.re/share/pushapp-minapi9.apk)
 
 Project also contained website which helps you to manage your api keys and devices in browser. See: [pushme.neutrino.re](http://pushme.neutrino.re/)
 
